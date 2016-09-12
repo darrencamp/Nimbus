@@ -26,6 +26,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
         private readonly EnableDeadLetteringOnMessageExpirationSetting _enableDeadLetteringOnMessageExpiration;
         private readonly GlobalPrefixSetting _globalPrefix;
         private readonly MaxDeliveryAttemptSetting _maxDeliveryAttempts;
+        private readonly EnablePartitioningSetting _enablePartitioning;
 
         private readonly ThreadSafeLazy<ConcurrentSet<string>> _knownTopics;
         private readonly ThreadSafeLazy<ConcurrentSet<string>> _knownSubscriptions;
@@ -45,11 +46,13 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                                  EnableDeadLetteringOnMessageExpirationSetting enableDeadLetteringOnMessageExpiration,
                                  GlobalPrefixSetting globalPrefix,
                                  MaxDeliveryAttemptSetting maxDeliveryAttempts,
+                                 EnablePartitioningSetting enablePartitioning,
                                  IPathFactory pathFactory,
                                  IRetry retry,
                                  ISqlFilterExpressionGenerator sqlFilterExpressionGenerator,
                                  ITypeProvider typeProvider)
         {
+            _enablePartitioning = enablePartitioning;
             _namespaceManager = namespaceManager;
             _messagingFactory = messagingFactory;
             _maxDeliveryAttempts = maxDeliveryAttempts;
@@ -341,6 +344,7 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                                                      {
                                                          MaxDeliveryCount = _maxDeliveryAttempts,
                                                          DefaultMessageTimeToLive = _defaultMessageTimeToLive,
+                                                         EnablePartitioning = _enablePartitioning,
                                                          EnableDeadLetteringOnMessageExpiration = true,
                                                          EnableBatchedOperations = true,
                                                          RequiresDuplicateDetection = false,
