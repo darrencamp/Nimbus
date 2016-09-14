@@ -360,8 +360,11 @@ namespace Nimbus.Transports.AzureServiceBus.QueueManagement
                               {
                                   _namespaceManager().CreateQueue(queueDescription);
                               }
-                              catch (MessagingEntityAlreadyExistsException)
+                              catch (MessagingEntityAlreadyExistsException exc)
                               {
+                                  if (_namespaceManager().GetQueue(queueDescription.Path).EnablePartitioning != queueDescription.EnablePartitioning)
+                                      throw new BusException($"The partitioning state of Queue {queuePath} cannot be changed.", exc)
+                                          .WithData("QueuePath", queuePath);
                                   _namespaceManager().UpdateQueue(queueDescription);
                               }
                               catch (MessagingException exc)

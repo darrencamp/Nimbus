@@ -4,9 +4,6 @@ namespace Nimbus.Configuration.Settings
 {
     public class EnablePartitioningSetting : Setting<bool>
     {
-        public override bool Default
-        {
-            get { return false; }
-        }
+        public override bool Default => false;
     }
 }

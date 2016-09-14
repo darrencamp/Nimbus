@@ -27,6 +27,7 @@ namespace Nimbus.Transports.AzureServiceBus
         internal ServerConnectionCountSetting ServerConnectionCount { get; set; } = new ServerConnectionCountSetting();
         internal MaxSmallMessageSizeSetting MaxSmallMessageSize { get; set; } = new MaxSmallMessageSizeSetting();
         internal MaxLargeMessageSizeSetting MaxLargeMessageSize { get; set; } = new MaxLargeMessageSizeSetting();
+        internal EnablePartitioningSetting EnablePartitioning { get; set; } = new EnablePartitioningSetting();
 
         internal LargeMessageStorageConfiguration LargeMessageStorageConfiguration { get; set; } = new UnsupportedLargeMessageBodyStorageConfiguration();
 
@@ -51,6 +52,12 @@ namespace Nimbus.Transports.AzureServiceBus
         public AzureServiceBusTransportConfiguration WithServerConnectionCount(int serverConnectionCount)
         {
             ServerConnectionCount = new ServerConnectionCountSetting {Value = serverConnectionCount};
+            return this;
+        }
+
+        public AzureServiceBusTransportConfiguration WithPartitioning()
+        {
+            EnablePartitioning = new EnablePartitioningSetting { Value = true };
             return this;
         }
 
