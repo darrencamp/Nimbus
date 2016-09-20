@@ -131,6 +131,7 @@
     <Compile Include="TestScenarioGeneration\ConfigurationSources\SynchronizationContexts\SyncContextConfiguration.cs" />
     <Compile Include="TestScenarioGeneration\ConfigurationSources\SynchronizationContexts\SynchronizationContextConfigurationSources.cs" />
     <Compile Include="TestScenarioGeneration\ConfigurationSources\Transports\AzureServiceBus.cs" />
+    <Compile Include="TestScenarioGeneration\ConfigurationSources\Transports\AzureServiceBusWithPartitionedQueues.cs" />
     <Compile Include="TestScenarioGeneration\ScenarioComposition\Filters\InProcessScenariosFilter.cs" />
     <Compile Include="TestUtilities\SingleThreadedSynchronizationContext.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
