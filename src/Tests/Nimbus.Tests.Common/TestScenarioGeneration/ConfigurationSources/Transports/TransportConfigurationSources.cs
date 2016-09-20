@@ -17,6 +17,7 @@ namespace Nimbus.Tests.Common.TestScenarioGeneration.ConfigurationSources.Transp
             {
                 //yield return new WindowsServiceBus(largeMessageStorage);  //FIXME reinstate when we have separate app domains
                 yield return new AzureServiceBus(largeMessageStorage);
+                yield return new AzureServiceBusWithPartitionedQueues(largeMessageStorage);
             }
         }
 
